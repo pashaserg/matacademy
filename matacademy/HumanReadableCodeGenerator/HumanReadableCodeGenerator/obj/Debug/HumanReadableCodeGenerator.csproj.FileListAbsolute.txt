@@ -1,0 +1,11 @@
+E:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.exe.config
+E:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.exe
+E:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.pdb
+E:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\obj\Debug\HumanReadableCodeGenerator.exe
+E:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\obj\Debug\HumanReadableCodeGenerator.pdb
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.exe.config
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\obj\Debug\HumanReadableCodeGenerator.exe
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\obj\Debug\HumanReadableCodeGenerator.pdb
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.exe
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\bin\Debug\HumanReadableCodeGenerator.pdb
+H:\ACADEMY\HumanReadableCodeGenerator\HumanReadableCodeGenerator\obj\Debug\HumanReadableCodeGenerator.csprojResolveAssemblyReference.cache

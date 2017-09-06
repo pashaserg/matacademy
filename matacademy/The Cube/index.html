@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Cube</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        BODY {
+            padding-top: 100px;
+            height: 100%;
+            perspective: 1000px;
+            perspective-origin: center -5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .side,
+        .box {
+            width: 10em;
+            height: 10em;
+        }
+        
+        .box {
+            color: rgb(255, 0, 0);
+            transform-style: preserve-3d;
+            animation: rotate 25s infinite linear;
+        }
+        
+        .box:before,
+        .box:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10em;
+            height: 10em;
+        }
+        
+        .box:before {
+            transform: rotateX(90deg);
+        }
+        
+        .box:after {
+            transform: rotatey(90deg);
+        }
+        
+        .side {
+            position: absolute;
+            width: 10em;
+            height: 10em;
+            border: 2px solid black;
+            opacity: 1;
+        }
+        
+        .back {
+            transform: translateZ(-5em);
+            background: linear-gradient(45deg, #CBDDEB, #CBDDEB 50%, #527383 50%);
+            background-size: 50px 50px;
+        }
+        
+        .left {
+            transform: translateX(-5em) rotateY(90deg);
+            background: linear-gradient(170deg, transparent 80%, #91CBCF 30%), linear-gradient(156deg, transparent 68%, #E3D9C3 30%), linear-gradient(135deg, transparent 60%, #91CBCF 30%), linear-gradient(115deg, transparent 55%, #E3D9C3 30%), linear-gradient(65deg, transparent 45%, #91CBCF 30%), linear-gradient(45deg, transparent 40%, #E3D9C3 30%), linear-gradient(24deg, transparent 32%, #91CBCF 30%), linear-gradient(10deg, transparent 20%, #E3D9C3 20%), linear-gradient(0deg, transparent 0%, #91CBCF 0%);
+            background-position: center;
+            background-size: 100% 100%;
+        }
+        
+        .right {
+            transform: translateX(5em) rotateY(90deg);
+            background-color: #F2D95D;
+            background-image: radial-gradient(#7F7E7F 76%, transparent 0), radial-gradient(#7F7E7F 72%, transparent 0), radial-gradient(#7F7E7F 68%, transparent 0), radial-gradient(#7F7E7F 64%, transparent 0), radial-gradient(#7F7E7F 60%, transparent 0), radial-gradient(#7F7E7F 56%, transparent 0), radial-gradient(#7F7E7F 52%, transparent 0), radial-gradient(#7F7E7F 48%, transparent 0), radial-gradient(#7F7E7F 44%, transparent 0), radial-gradient(#7F7E7F 40%, transparent 0), radial-gradient(#7F7E7F 36%, transparent 0), radial-gradient(#7F7E7F 32%, transparent 0), radial-gradient(#7F7E7F 28%, transparent 0), radial-gradient(#7F7E7F 24%, transparent 0);
+            background-size: 1em 1em;
+            background-repeat: repeat-y;
+            background-position: 0 0, 1em 0, 2em 0, 3em 0, 4em 0, 5em 0, 6em 0, 7em 0, 8em 0, 9em 0, 10em 0, 11em 0, 12em 0, 13em 0;
+        }
+        
+        .top {
+            transform: translateY(-5em) rotateX(90deg);
+            background-color: #f76;
+            background-image: linear-gradient(30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%), linear-gradient(-30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%), linear-gradient(30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%), linear-gradient(-30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%), linear-gradient(30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%), linear-gradient(-30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%), linear-gradient(30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%), linear-gradient(-30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%), linear-gradient(45deg, #544 25%, transparent 25%, transparent 75%, #544 75%), linear-gradient(45deg, #544 25%, transparent 25%, transparent 75%, #544 75%);
+            background-position: 0 2em, 0 2em, 2em 4em, 2em 4em, 4em 2em, 4em 2em, 6em 4em, 6em 4em, 0 0, 2em 2em;
+            background-size: 8em 4em, 8em 4em, 8em 4em, 8em 4em, 8em 4em, 8em 4em, 8em 4em, 8em 4em, 4em 4em, 4em 4em;
+        }
+        
+        .bottom {
+            transform: translateY(5em) rotateX(90deg);
+            background-size: 48px 18px;
+            background-color: #CBCFD1;
+            background-image: linear-gradient(90deg, #607584 1%, transparent 2%), linear-gradient(45deg, transparent 7%, #607584 10%, transparent 10%, transparent 35%, #607584 37%, transparent 33%), linear-gradient(-45deg, transparent 8%, #E6EBED 10%, transparent 10%, transparent 35%, #E6EBED 37%, transparent 33%);
+        }
+        
+        .front {
+            transform: translateZ(5em);
+            background-color: #1E3A52;
+            background-image: linear-gradient(30deg, #83C5E5 12%, transparent 12.5%, transparent 87%, #83C5E5 87.5%, #83C5E5), linear-gradient(150deg, #83C5E5 12%, transparent 12.5%, transparent 87%, #83C5E5 87.5%, #83C5E5), linear-gradient(30deg, #83C5E5 12%, transparent 12.5%, transparent 87%, #83C5E5 87.5%, #83C5E5), linear-gradient(150deg, #83C5E5 12%, transparent 12.5%, transparent 87%, #83C5E5 87.5%, #83C5E5), linear-gradient(60deg, #FE5568 25%, transparent 25.5%, transparent 75%, #FE5568 75%, #FE5568), linear-gradient(60deg, #FE5568 25%, transparent 25.5%, transparent 75%, #FE5568 75%, #FE5568);
+            background-position: 0 0, 0 0, 25px 50px, 25px 50px, 0 0, 25px 50px;
+            background-size: 50px 100px;
+        }
+        
+        @keyframes rotate {
+            100% {
+                transform: rotatex(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="side front">front side</div>
+        <div class="side left">left side</div>
+        <div class="side right">right side</div>
+        <div class="side bottom">bottom side</div>
+        <div class="side back">back side</div>
+        <div class="side top">top side</div>
+    </div>
+</body>
+
+</html>
