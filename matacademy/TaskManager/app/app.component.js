@@ -5,7 +5,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var app_component_service_1 = require("./app.component.service");
 var Task = (function () {
     function Task(task) {
         this._task = task;
@@ -15,59 +19,42 @@ var Task = (function () {
 }());
 exports.Task = Task;
 var AppComponent = (function () {
-    function AppComponent() {
-        this.tasks = JSON.parse(localStorage.getItem("LocalTasks"));
+    function AppComponent(dataService) {
+        this.dataService = dataService;
+        this.tasks = [];
     }
     AppComponent.prototype.addTask = function (task) {
-        if (task == null || task == undefined || task.trim() == "")
-            return;
-        //debugger;
-        if (this.tasks == null)
-            this.tasks = [];
-        this.tasks.push(new Task(task));
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
+        this.dataService.addData(task);
+        this.tasks = this.dataService.getData();
     };
     AppComponent.prototype.deleteTask = function (task) {
-        this.tasks.splice(this.tasks.indexOf(task), 1);
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
+        this.dataService.deleteData(task);
     };
     AppComponent.prototype.doneTask = function (task) {
-        var t = this.tasks[this.tasks.indexOf(task)];
-        if (t.done == true)
-            t.done = false;
-        else
-            t.done = true;
-        //t.done==false?t.done=true:t.done=false;
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
+        this.dataService.doneData(task);
     };
     AppComponent.prototype.ShowEditTask = function (task) {
-        document.getElementById("editinput").setAttribute("value", task._task);
-        document.getElementById("editdiv").removeAttribute("hidden");
-        this.temp_task = task;
+        this.dataService.ShowEditData(task);
     };
     AppComponent.prototype.editTask = function (task) {
-        document.getElementById('editinput').getAttribute('value');
-        var text = document.getElementById("editinput");
-        var inp = text.value;
-        console.log(task);
-        this.temp_task._task = inp;
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
-        this.cancelEdit();
+        this.dataService.editData(task);
     };
     AppComponent.prototype.cancelEdit = function () {
-        document.getElementById("editdiv").setAttribute("hidden", "true");
+        this.dataService.cancelEditData();
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.tasks = this.dataService.getData();
     };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'task-list-app',
-        templateUrl: '/app/app.component.html'
-    })
+        templateUrl: '/app/app.component.html',
+        styleUrls: ['/app/app.component.css'],
+        providers: [app_component_service_1.DataService]
+    }),
+    __metadata("design:paramtypes", [app_component_service_1.DataService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

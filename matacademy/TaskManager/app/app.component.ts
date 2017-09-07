@@ -1,80 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 
-export class Task{
-_task: string;
-done: boolean;
+import { DataService}           from './app.component.service';
 
-constructor(task: string) {
+export class Task {
+    _task: string;
+    done: boolean;
 
-   this._task = task;
-   this.done = false;
-}
+    constructor(task: string) {
+
+        this._task = task;
+        this.done = false;
+
+    }
 }
 
 @Component({
-    selector: 'task-list-app',
-    templateUrl: '/app/app.component.html'
+
+    selector:       'task-list-app',
+    templateUrl:    '/app/app.component.html',
+    styleUrls:      ['/app/app.component.css'],
+    providers:      [DataService]
+
 })
-export class AppComponent{
-    tasks: Task[]= JSON.parse(localStorage.getItem("LocalTasks"));
-    temp_task:Task;
+export class AppComponent implements OnInit {
+
+    tasks: Task[] = [];
+    temp_task: Task;
+    constructor(private dataService: DataService) {}
+
     addTask(task: string): void {
-        
-       if(task==null || task==undefined || task.trim()=="")
-           return;
-       //debugger;
-       if(this.tasks==null)
-        this.tasks = [];
-       this.tasks.push(new Task(task));
-
-       var serialObj = JSON.stringify(this.tasks);
-       localStorage.setItem("LocalTasks", serialObj);
+        this.dataService.addData(task);
+        this.tasks = this.dataService.getData();
     }
 
-    deleteTask(task:Task): void{
-        
-        this.tasks.splice(this.tasks.indexOf(task),1);
-
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
-        
+    deleteTask(task: Task): void {
+        this.dataService.deleteData(task);
     }
 
-    doneTask(task:Task): void{
-        
-        var t = this.tasks[this.tasks.indexOf(task)];
-        
-        if(t.done==true)
-            t.done=false;
-        else t.done = true;
-       //t.done==false?t.done=true:t.done=false;
-
-       var serialObj = JSON.stringify(this.tasks);
-       localStorage.setItem("LocalTasks", serialObj);
+    doneTask(task: Task): void {
+        this.dataService.doneData(task);
     }
 
-    ShowEditTask(task:Task):void{
-        document.getElementById("editinput").setAttribute("value", task._task);
-        document.getElementById("editdiv").removeAttribute("hidden");
-        this.temp_task=task;
+    ShowEditTask(task: Task): void {
+        this.dataService.ShowEditData(task);
     }
 
-
-
-    editTask(task:Task): void{
-         document.getElementById('editinput').getAttribute('value');
-         var text = document.getElementById("editinput");         
-         var inp = text.value;
-         console.log(task);
-        this.temp_task._task=inp;
-
-        var serialObj = JSON.stringify(this.tasks);
-        localStorage.setItem("LocalTasks", serialObj);
-        this.cancelEdit();
+    editTask(task: Task): void {
+        this.dataService.editData(task);
     }
 
-    cancelEdit(): void{
-        document.getElementById("editdiv").setAttribute("hidden","true");
-        
+    cancelEdit(): void {
+        this.dataService.cancelEditData();
+    }
+
+    ngOnInit() {
+        this.tasks = this.dataService.getData();
     }
 }
